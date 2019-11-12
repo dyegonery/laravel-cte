@@ -2,15 +2,16 @@
 
 namespace Staudenmeir\LaravelCte\Query;
 
+use RuntimeException;
 use Illuminate\Database\Connection;
 use Illuminate\Database\Query\Builder as Base;
 use Illuminate\Database\Query\Grammars\Grammar;
 use Illuminate\Database\Query\Processors\Processor;
-use RuntimeException;
 use Staudenmeir\LaravelCte\Query\Grammars\MySqlGrammar;
 use Staudenmeir\LaravelCte\Query\Grammars\PostgresGrammar;
 use Staudenmeir\LaravelCte\Query\Grammars\SQLiteGrammar;
 use Staudenmeir\LaravelCte\Query\Grammars\SqlServerGrammar;
+use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 
 class Builder extends Base
 {
@@ -90,9 +91,11 @@ class Builder extends Base
         return $this;
     }
 
-      /**
+    /**
      * Creates a subquery and parse it.
-     *
+     * 
+     * ! A function taken from version 5.6 of the query builder
+     * 
      * @param  \Closure|\Illuminate\Database\Query\Builder|string $query
      * @return array
      */
@@ -112,7 +115,9 @@ class Builder extends Base
 
      /**
      * Parse the subquery into SQL and bindings.
-     *
+     * 
+     * ! A function taken from version 5.6 of the query builder
+     * 
      * @param  mixed  $query
      * @return array
      */
@@ -130,6 +135,8 @@ class Builder extends Base
       /**
      * Create a new query instance for a sub-query.
      *
+     * ! A function taken from version 5.6 of the query builder
+     * 
      * @return \Illuminate\Database\Query\Builder
      */
     protected function forSubQuery()

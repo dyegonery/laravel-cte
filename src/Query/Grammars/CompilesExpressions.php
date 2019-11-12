@@ -49,6 +49,7 @@ trait CompilesExpressions
      */
     protected function recursiveKeyword(array $expressions)
     {
+        // ! Remove collection isNotEmpty function (and replace by a home made function that check if exist any recursive) 
         $items =  collect($expressions)->where('recursive', true)->all();
         return !empty(array_filter($items, function($item){
             return !empty($item['recursive']);
