@@ -1,5 +1,5 @@
 {
-    "name": "staudenmeir/laravel-cte",
+    "name": "CBIConsulting/laravel-cte",
     "description": "Laravel queries with common table expressions",
     "license": "MIT",
     "authors": [
