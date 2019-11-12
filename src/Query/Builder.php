@@ -90,6 +90,53 @@ class Builder extends Base
         return $this;
     }
 
+      /**
+     * Creates a subquery and parse it.
+     *
+     * @param  \Closure|\Illuminate\Database\Query\Builder|string $query
+     * @return array
+     */
+    protected function createSub($query)
+    {
+        // If the given query is a Closure, we will execute it while passing in a new
+        // query instance to the Closure. This will give the developer a chance to
+        // format and work with the query before we cast it to a raw SQL string.
+        if ($query instanceof \Closure) {
+            $callback = $query;
+
+            $callback($query = $this->forSubQuery());
+        }
+
+        return $this->parseSub($query);
+    }
+
+     /**
+     * Parse the subquery into SQL and bindings.
+     *
+     * @param  mixed  $query
+     * @return array
+     */
+    protected function parseSub($query)
+    {
+        if ($query instanceof self || $query instanceof EloquentBuilder) {
+            return [$query->toSql(), $query->getBindings()];
+        } elseif (is_string($query)) {
+            return [$query, []];
+        } else {
+            throw new InvalidArgumentException;
+        }
+    }
+
+      /**
+     * Create a new query instance for a sub-query.
+     *
+     * @return \Illuminate\Database\Query\Builder
+     */
+    protected function forSubQuery()
+    {
+        return $this->newQuery();
+    }
+
     /**
      * Add a recursive common table expression to the query.
      *

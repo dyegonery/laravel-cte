@@ -49,7 +49,20 @@ trait CompilesExpressions
      */
     protected function recursiveKeyword(array $expressions)
     {
-        return collect($expressions)->where('recursive', true)->isNotEmpty() ? 'recursive ' : '';
+        $items =  collect($expressions)->where('recursive', true)->all();
+        return !empty(array_filter($items, function($item){
+            return !empty($item['recursive']);
+        }));
+    }
+
+     /**
+     * Determine if the collection is not empty.
+     *
+     * @return bool
+     */
+    protected function isNotEmpty()
+    {
+        return ! $this->isEmpty();
     }
 
     /**
