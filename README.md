@@ -8,7 +8,7 @@
 ## Introduction
 This Laravel extension adds support for common table expressions (CTE) to the query builder and Eloquent.
 
-Supports Laravel 5.5+.
+Supports Laravel 5.2.
 
 ## Compatibility
 
@@ -73,7 +73,7 @@ $numbers = DB::table('numbers')
 
 ### INSERT/UPDATE/DELETE Queries
 
-You can use common table expressions in `INSERT`(Laravel 5.7.17+), `UPDATE` and `DELETE` queries:
+You can use common table expressions in `INSERT`(Laravel 5.2), `UPDATE` and `DELETE` queries:
 
 ```php
 DB::table('profiles')
@@ -99,7 +99,7 @@ DB::table('profiles')
 
 You can use common table expressions in Eloquent queries.
 
-In Laravel 5.5–5.7, this requires the `QueriesExpressions` trait:
+In Laravel 5.2, this requires the `QueriesExpressions` trait:
 
 ```php
 class User extends Model
