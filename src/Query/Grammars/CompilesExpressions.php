@@ -30,6 +30,8 @@ trait CompilesExpressions
 
         $recursive = $this->recursiveKeyword($query->expressions);
 
+        $recursive = $recursive === true ? ' RECURSIVE ' : $recursive;
+
         $statements = [];
 
         foreach ($query->expressions as $expression) {
