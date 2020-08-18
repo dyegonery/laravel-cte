@@ -188,4 +188,66 @@ class Builder extends Base
             $this->cleanBindings($bindings)
         );
     }
+
+     /**
+     * Get the SQL representation of the query.
+     *
+     * @return string
+     */
+    public function toSql()
+    {
+        if(!empty($this->expressions) && !empty($this->unions)){
+            return  $this->compileUnionWithExpressions($this);
+        }
+        
+        return parent::toSql();
+    }
+
+    /**
+     * ! important
+     * ! What the hell is this?
+     * 
+     * 
+     * This grammar library has an error when mixing expressions clauses with union
+     * When the grammar object detects a union create a array like
+     * 
+     * (select * from patata_collection) union (select * from tomate_collection)
+     * 
+     * This means that compiles the first query between brackets, but when the builder has expressions (cte clauses)
+     * generates something like this:
+     * 
+     * (with patata as (select * from patata_collection)) select * from patata) union (select * from tomate_collection)
+     * 
+     * This is wrong because cte must be defined of the top the query
+     * 
+     * To avoid copy the laravel illuminate repository and modify grammar object I am using the reflection class to access
+     * the protected methods and fix the compilation problem
+     * 
+     * surely if update the illuminate query builder version this problem has been fixed, but right now this option is not viable 
+     * 
+     *
+     * @return string
+     */
+    private function compileUnionWithExpressions(){
+       
+        $expressions = $this->expressions;
+        $this->expressions = [];
+        $grammar =  $this->grammar->compileSelect($this);
+        $this->expressions = $expressions;
+
+        
+        $class = new \ReflectionClass($this->grammar);
+        
+        $compileComponentsMethod = $class->getMethod('compileComponents');
+        $compileComponentsMethod->setAccessible(true);
+
+        $concatenateMethod =  $class->getMethod('concatenate');
+        $concatenateMethod->setAccessible(true);
+
+        $components =  $compileComponentsMethod->invokeArgs($this->grammar, [$this]);
+        $compiledExpressions = $components['expressions'] ?? '';
+        $grammar = $concatenateMethod->invokeArgs($this->grammar,[[$compiledExpressions,$grammar]]);
+
+        return $grammar;
+    }
 }
