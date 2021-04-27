@@ -5,12 +5,12 @@
     "authors": [
         {
             "name": "Jonas Staudenmeir",
-            "email": "mail@jonas-staudenmeir.de"
+            "email": "false@jonas-staudenmeir.de"
         }
     ],
     "require": {
         "php": "^7.4",
-        "illuminate/database": "^7.0",
+        "illuminate/database": "^6.0",
 		"phpunit/phpunit": "^8.4"
     },
     "require-dev": {
