@@ -1,6 +1,6 @@
 <?php
 
-namespace Staudenmeir\LaravelCte\Connections;
+namespace Dnery\LaravelCte\Connections;
 
 use Illuminate\Database\PostgresConnection as Base;
 

@@ -1,16 +1,16 @@
 <?php
 
-namespace Staudenmeir\LaravelCte\Query;
+namespace Dnery\LaravelCte\Query;
 
 use RuntimeException;
 use Illuminate\Database\Connection;
 use Illuminate\Database\Query\Builder as Base;
 use Illuminate\Database\Query\Grammars\Grammar;
 use Illuminate\Database\Query\Processors\Processor;
-use Staudenmeir\LaravelCte\Query\Grammars\MySqlGrammar;
-use Staudenmeir\LaravelCte\Query\Grammars\PostgresGrammar;
-use Staudenmeir\LaravelCte\Query\Grammars\SQLiteGrammar;
-use Staudenmeir\LaravelCte\Query\Grammars\SqlServerGrammar;
+use Dnery\LaravelCte\Query\Grammars\MySqlGrammar;
+use Dnery\LaravelCte\Query\Grammars\PostgresGrammar;
+use Dnery\LaravelCte\Query\Grammars\SQLiteGrammar;
+use Dnery\LaravelCte\Query\Grammars\SqlServerGrammar;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 
 class Builder extends Base
@@ -128,7 +128,7 @@ class Builder extends Base
         } elseif (is_string($query)) {
             return [$query, []];
         } else {
-            throw new InvalidArgumentException;
+            throw new \InvalidArgumentException;
         }
     }
 

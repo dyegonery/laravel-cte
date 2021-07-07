@@ -1,5 +1,5 @@
 {
-    "name": "vdediego-cbi/laravel-cte",
+    "name": "dyegonery/laravel-cte",
     "description": "Laravel queries with common table expressions",
     "license": "MIT",
     "authors": [
@@ -17,7 +17,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Staudenmeir\\LaravelCte\\": "src/"
+            "Dnery\\LaravelCte\\": "src/"
         }
     },
     "autoload-dev": {
@@ -28,7 +28,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Staudenmeir\\LaravelCte\\DatabaseServiceProvider"
+                "Dnery\\LaravelCte\\DatabaseServiceProvider"
             ]
         }
     }

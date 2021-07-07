@@ -1,6 +1,6 @@
 <?php
 
-namespace Staudenmeir\LaravelCte\Query\Grammars;
+namespace Dnery\LaravelCte\Query\Grammars;
 
 use Illuminate\Database\Query\Grammars\SQLiteGrammar as Base;
 use Staudenmeir\LaravelCte\Query\Builder;
